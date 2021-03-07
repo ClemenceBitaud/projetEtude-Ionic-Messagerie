@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- Bouton flèche retour -->
+    <ion-buttons slot="start">
+      <ion-button color="light" (click)="back()">
+        <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Créer votre compte</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="userForm" (ngSubmit)="createAccount()">
+
+    <ion-item>
+      <ion-label position="floating" color="light">Firstname</ion-label>
+      <ion-input type="text" formControlName="firstName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating" color="light">Lastname</ion-label>
+      <ion-input type="text" formControlName="lastName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating" color="light">Birthdate</ion-label>
+      <ion-datetime formControlName="birthdate"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating" color="light">Username</ion-label>
+      <ion-input type="text" formControlName="username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating" color="light">Confirm your password</ion-label>
+      <ion-input type="password" formControlName="confirmPassword"></ion-input>
+    </ion-item>
+    <span class="error" *ngIf="isPasswordValid == false">Les deux mots de passe ne sont pas identiques</span>
+
+    <ion-item>
+      <ion-label position="floating" color="light">Address</ion-label>
+      <ion-input type="text" formControlName="address"></ion-input>
+    </ion-item>
+
+    <input id="picture" class="file" type="file" ref="imageInput" accept="image/x-png,image/gif,image/jpeg"/>
+
+    <ion-item>
+      <ion-button (click)="createAccount()" [disabled]="userForm.invalid">
+        <ion-icon size="small" slot="icon-only" name="add" color="light"></ion-icon>
+        &nbsp;<ion-label color="light">Créer mon compte</ion-label>
+      </ion-button>
+    </ion-item>
+
+  </form>
+
+</ion-content>

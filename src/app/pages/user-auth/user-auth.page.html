@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Bienvenue !!!</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="!connected">
+    <!-- A afficher si l'utilisateur n'est pas connecté -->
+
+    <form [formGroup]="authForm">
+      <ion-item>
+        <ion-label position="floating" color="light">Email</ion-label>
+        <ion-input type="email" formControlName="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating" color="light">Password</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+    </form>
+
+    <ion-button (click)="login()" [disabled]="authForm.invalid" color="primary">
+      <ion-icon size="small" slot="icon-only" name="log-in-outline" color="light"></ion-icon>
+      &nbsp;<ion-label color="light">Connexion</ion-label>
+    </ion-button>
+
+    <p>Pas encore de compte ? Remplissez votre adresse mail et un mot de passe puis cliquez sur Inscription</p>
+
+    <ion-button (click)="signUp()" [disabled]="authForm.invalid" color="primary">
+      <ion-icon size="small" slot="icon-only" name="add" color="light"></ion-icon>
+      &nbsp;<ion-label color="light">Inscription</ion-label>
+    </ion-button>
+  </div>
+  <div *ngIf="connected">
+    <!-- Si l'utilisateur est connecté -->
+    <ion-button (click)="logout()">Deconnexion</ion-button>
+  </div>
+
+</ion-content>

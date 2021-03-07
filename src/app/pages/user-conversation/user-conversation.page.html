@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- Bouton flèche retour -->
+    <ion-buttons slot="start">
+      <ion-button color="light" (click)="back()">
+        <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <!-- Username -->
+    <ion-title>
+      {{usernameUserToTalk}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <!-- Bouton profil utilisateur -->
+      <ion-button color="light" (click)="goToProfile(idUserToTalk)">
+        <ion-icon name="person-circle-outline" slot="icon-only" ></ion-icon>
+      </ion-button>
+      <!-- Bouton deconnexion -->
+      <ion-button color="light" (click)="logout()">
+        <ion-icon name="power-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="connected">
+  <!-- Affichage de messages -->
+  <ion-item class="message_item" lines="none" *ngFor="let message of messages">
+    <div *ngIf="message.senderId === currentUser && message.receiverId === idUserToTalk" slot="end" (click)="messageVisible()">
+      <!-- Date -->
+      <p class="text_date" *ngIf="isDateVisible == true">{{message.date}}</p>
+      <div class="messageAndButton">
+        <!-- Message -->
+        <ion-badge text-wrap color="secondary" slot="end">{{message.messageText}}</ion-badge>
+        <!-- Button suppression du message -->
+        <ion-buttons slot="start">
+          <ion-button color="light" (click)="delete(message.id)">
+            <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <!-- Button update du message -->
+        <ion-buttons slot="start">
+          <ion-button color="light" (click)="presentModal(message.id, currentUser, idUserToTalk, message.date)">
+            <ion-icon name="pencil-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </div>
+    </div>
+    <div *ngIf="message.senderId === idUserToTalk && message.receiverId === currentUser" slot="start" (click)="messageVisible()">
+      <p class="text_date" *ngIf="isDateVisible == true">{{message.date}}</p>
+      <ion-badge text-wrap color="dark" slot="start">{{message.messageText}}</ion-badge>
+    </div>
+  </ion-item>
+</ion-content>
+<!-- Affichage de l'input et du bouton pour envoyer le message -->
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <!-- Input pour taper le message -->
+      <ion-col size="10" class="input-col">
+        <ion-input [(ngModel)]="messageText" placeholder="Entrez votre message" type="text"></ion-input>
+      </ion-col>
+      <!-- Bouton envoi du message -->
+      <ion-col size="2" class="send-col">
+        <ion-button shape="full" (click)="sendMessage()">
+          <ion-icon color="light" slot="icon-only" name="send"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-footer>

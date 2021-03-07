@@ -1,0 +1,31 @@
+<div class="header">
+  <ion-buttons slot="start">
+    <ion-button color="light" (click)="back.emit()">
+      <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <h2>{{user.username}}</h2>
+
+  <div class="space-between">
+    <p>{{user.firstName}}</p>
+    <p>{{user.lastName}}</p>
+  </div>
+</div>
+
+<div class="flex">
+    <div class="image-border-white">
+      <ion-avatar class="image-box">
+        <img src="{{user?.picture}}">
+      </ion-avatar>
+    </div>
+</div>
+
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>{{user.email}}</ion-card-subtitle>
+    <ion-card-title>{{user.birthdate}}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    {{user.address}}
+  </ion-card-content>
+</ion-card>

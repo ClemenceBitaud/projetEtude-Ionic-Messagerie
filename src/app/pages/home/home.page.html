@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Vos conversations
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="logout()">
+        <ion-icon name="power-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="connected">
+  <!-- Affichage de la liste des users -->
+  <ion-list *ngFor="let user of users">
+    <ion-item (click)="goToConversation(user.id,user.username)">
+      <ion-avatar slot="start">
+        <img src="{{user?.picture}}">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{user.username}}</h2>
+        <h3>{{user.id}}</h3>
+        <p>Dernier message envoyer</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

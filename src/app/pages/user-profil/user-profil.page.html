@@ -1,0 +1,9 @@
+<ion-content [fullscreen]="true" *ngIf="connected">
+
+  <app-user-profil-item *ngFor="let user of theUser"
+                        [user]="user"
+                        (back)="back()"
+  ></app-user-profil-item>
+
+
+</ion-content>
